@@ -1,27 +1,11 @@
 <?php
 
 require "src/conexao-bd.php";
+require "src/Modelo/Livro.php";
+require "src/Repositorio/LivroRepositorio.php";
 
-$sql = "SELECT * FROM livros";
-
-/**
- * Executa a query e retorna uma instância do banco de dados (statement) 
- **/
-$statement = $pdo->query($sql);
-
-/**
- * Retorna um item por vez. Útil qdo o retorno é muito grande
- */
-/*while ($bibliografia = $statement->fetch(PDO::FETCH_ASSOC)){
-    var_dump($bibliografia);
-}
-exit;*/
-
-/**
- * Método fechAll recupera todos os resultados
- * Sem parâmetro, retorna duplicado em dois formatos
- */
-$bibliografia = $statement->fetchAll();
+$dadosLivros = new LivroRepositorio($pdo);
+$bibliografia = $dadosLivros->referencialBibliografico();
 
 ?>
 
@@ -59,11 +43,11 @@ $bibliografia = $statement->fetchAll();
             <?php foreach ($bibliografia as $livro):?>
                 <div class="container-livro">
                     <div class="container-foto">
-                        <img src="<?= $livro['imagem'] ?>">
+                        <img src="<?= $livro->getImagem() ?>">
                     </div>
-                    <p><?= $livro['titulo'] ?></p>
-                    <p><?= $livro['descricao'] ?></p>
-                    <p><?= $livro['autor'] ?></p>
+                    <p><?= $livro->getTitulo() ?></p>
+                    <p><?= $livro->getDescricao() ?></p>
+                    <p><?= $livro->getAutor() ?></p>
                 </div>
             <?php endforeach ?>
             </div>
