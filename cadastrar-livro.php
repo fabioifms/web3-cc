@@ -1,3 +1,24 @@
+<?php
+
+    require "src/conexao-bd.php";
+    require "src/Modelo/Livro.php";
+    require "src/Repositorio/LivroRepositorio.php";
+
+    if (isset($_POST['cadastro'])){
+        $livro = new Livro(null,
+            $_POST['titulo'],
+            $_POST['autor'],
+            $_POST['descricao']
+        );
+
+        $livroRepositorio = new LivroRepositorio($pdo);
+        $livroRepositorio->salvar($livro);
+
+        header("Location: admin.php");
+
+    }
+?>
+
 <!doctype html>
 <html lang="pt-br">
 <head>
@@ -24,7 +45,7 @@
         <img class= "ornaments" src="img/ornamento.png" alt="ornaments">
     </section>
     <section class="container-form">
-        <form action="#">
+        <form action="cadastrar-livro.php" method="post">
 
             <label for="nome">Título</label>
             <input type="text" id="titulo" name="titulo" placeholder="Digite o título do livro" required>

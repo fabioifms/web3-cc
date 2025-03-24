@@ -81,7 +81,7 @@
       </tr>
       </tbody>
     </table>
-  <a class="botao-cadastrar" href="cadastrar-livro.html">Cadastrar livro</a>
+  <a class="botao-cadastrar" href="cadastrar-livro.php">Cadastrar livro</a>
   <form action="#" method="post">
     <input type="submit" class="botao-cadastrar" value="Baixar Relatório"/>
   </form>

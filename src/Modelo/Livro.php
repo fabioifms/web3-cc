@@ -2,13 +2,13 @@
 
 class Livro
 {
-    private int $id;
+    private ?int $id;
     private string $titulo;
     private string $autor;
     private string $descricao;
     private string $imagem;
 
-    public function __construct(int $id, string $titulo, string $autor, string $descricao, string $imagem)
+    public function __construct(?int $id, string $titulo, string $autor, string $descricao, string $imagem = "banner-negritude.jpg")
     {
         $this->id = $id;
         $this->titulo = $titulo;

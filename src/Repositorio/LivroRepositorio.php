@@ -40,4 +40,15 @@ class LivroRepositorio
             $dados['imagem']);
     }
 
+    public function salvar(Livro $livro)
+    {
+        $sql = "INSERT INTO livros (titulo, autor, descricao, imagem) VALUES (?,?,?,?)";
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindValue(1, $livro->getTitulo());
+        $statement->bindValue(2, $livro->getAutor());
+        $statement->bindValue(3, $livro->getDescricao());
+        $statement->bindValue(4, $livro->getImagem());
+        $statement->execute();
+    }
+
 }
