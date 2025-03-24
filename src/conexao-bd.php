@@ -15,6 +15,6 @@ $pdo = new PDO('pgsql:host=localhost;port=5432;dbname=web-cc', 'postgres', 'post
 /**
  * Imprime informações sobre a variável
  */
-var_dump($pdo);
+//var_dump($pdo);
 
 ?>
