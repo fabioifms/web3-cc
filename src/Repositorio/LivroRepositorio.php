@@ -51,4 +51,12 @@ class LivroRepositorio
         $statement->execute();
     }
 
+    public function deletar(int $id)
+    {
+        $sql = "DELETE FROM livros WHERE id = ?";
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindValue(1,$id);
+        $statement->execute();
+    }
+
 }

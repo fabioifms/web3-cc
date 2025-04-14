@@ -50,12 +50,13 @@ $bibliografia = $dadosLivros->referencialBibliografico();
       <?php foreach ($bibliografia as $livro):?>
       <tr>
         <td><?= $livro->getTitulo() ?></td>
-        <td><?= $livro->getAutor() ?>/td>
+        <td><?= $livro->getAutor() ?></td>
         <td><?= $livro->getDescricao() ?></td>
         <td><a class="botao-editar" href="editar-livro.html">Editar</a></td>
         <td>
-          <form>
-            <input type="button" class="botao-excluir" value="Excluir">
+          <form action="excluir-livro.php" method="post">
+            <input type="hidden" name="id" value="<?= $livro->getId() ?>">  
+            <input type="submit" class="botao-excluir" value="Excluir">
           </form>
         </td>        
       </tr>

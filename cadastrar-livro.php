@@ -11,6 +11,14 @@
             $_POST['descricao']
         );
 
+        //var_dump($_FILES);
+        //exit;
+
+        if (isset($_FILES['imagem'])){
+            $livro->setImagem(uniqid() . $_FILES['imagem']['name']);
+            move_uploaded_file($_FILES['imagem']['tmp_name'], $livro->getImagemDiretorio());
+        }
+
         $livroRepositorio = new LivroRepositorio($pdo);
         $livroRepositorio->salvar($livro);
 
@@ -45,7 +53,7 @@
         <img class= "ornaments" src="img/ornamento.png" alt="ornaments">
     </section>
     <section class="container-form">
-        <form action="cadastrar-livro.php" method="post">
+        <form action="cadastrar-livro.php" method="post" enctype="multipart/form-data">
 
             <label for="nome">Título</label>
             <input type="text" id="titulo" name="titulo" placeholder="Digite o título do livro" required>
