@@ -65,7 +65,7 @@ $bibliografia = $dadosLivros->referencialBibliografico();
       </tbody>
     </table>
   <a class="botao-cadastrar" href="cadastrar-livro.php">Cadastrar livro</a>
-  <form action="#" method="post">
+  <form action="gerador-pdf.php" method="post">
     <input type="submit" class="botao-cadastrar" value="Baixar Relatório"/>
   </form>
   </section>

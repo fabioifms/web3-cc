@@ -71,6 +71,19 @@ class LivroRepositorio
         return $this->formarObjeto($dados);
     }
 
+    public function buscarTodos(): array
+    {
+        $sql = "SELECT * FROM livros";
+        $statement = $this->pdo->query($sql);
+        $livros = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        $todosOsDados = array_map(function ($livro){
+            return $this->formarObjeto($livro);
+        },$livros);
+
+        return  $todosOsDados;
+    }
+
     public function atualizar(Livro $livro)
     {
         $sql = "UPDATE livros SET autor = ?, titulo = ?, descricao = ?, imagem = ? WHERE id = ?";
