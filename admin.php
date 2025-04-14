@@ -52,7 +52,7 @@ $bibliografia = $dadosLivros->referencialBibliografico();
         <td><?= $livro->getTitulo() ?></td>
         <td><?= $livro->getAutor() ?></td>
         <td><?= $livro->getDescricao() ?></td>
-        <td><a class="botao-editar" href="editar-livro.html">Editar</a></td>
+        <td><a class="botao-editar" href="editar-livro.php?id=<?= $livro->getId() ?>">Editar</a></td>
         <td>
           <form action="excluir-livro.php" method="post">
             <input type="hidden" name="id" value="<?= $livro->getId() ?>">  

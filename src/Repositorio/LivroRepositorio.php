@@ -59,4 +59,28 @@ class LivroRepositorio
         $statement->execute();
     }
 
+    public function buscar(int $id)
+    {
+        $sql = "SELECT * FROM livros WHERE id = ?";
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindValue(1, $id);
+        $statement->execute();
+
+        $dados = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $this->formarObjeto($dados);
+    }
+
+    public function atualizar(Livro $livro)
+    {
+        $sql = "UPDATE livros SET autor = ?, titulo = ?, descricao = ?, imagem = ? WHERE id = ?";
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindValue(1, $livro->getAutor());
+        $statement->bindValue(2, $livro->getTitulo());
+        $statement->bindValue(3, $livro->getDescricao());
+        $statement->bindValue(4, $livro->getImagem());
+        $statement->bindValue(5, $livro->getId());
+        $statement->execute();
+    }
+
 }

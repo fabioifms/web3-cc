@@ -1,3 +1,30 @@
+<?php
+  require "src/conexao-bd.php";
+  require "src/Modelo/Livro.php";
+  require "src/Repositorio/LivroRepositorio.php";
+
+  $livroRepositorio = new LivroRepositorio($pdo);
+
+
+  if (isset($_POST['editar'])){
+    $livro = new Livro($_POST['id'],
+                       $_POST['titulo'], 
+                       $_POST['autor'], 
+                       $_POST['descricao']);
+
+    if (isset($_FILES['imagem'])){
+      $livro->setImagem(uniqid() . $_FILES['imagem']['name']);
+      move_uploaded_file($_FILES['imagem']['tmp_name'], $livro->getImagemDiretorio());
+    }
+
+    $livroRepositorio->atualizar($livro);
+    header("Location: admin.php");
+  }
+  else{
+    $livro = $livroRepositorio->buscar($_GET['id']);
+  }
+?>
+
 <!doctype html>
 <html lang="pt-br">
 <head>
@@ -24,14 +51,15 @@
     <img class= "ornaments" src="img/ornamento.png" alt="ornaments">
   </section>
   <section class="container-form">
-    <form action="#">
+    <form action="editar-livro.php" method="post" enctype="multipart/form-data">
 
+      <input type="hidden" name="id" value="<?= $livro->getId()?>">
       <label for="nome">Título</label>
-      <input type="text" id="titulo" name="titulo" placeholder="Digite o título do livro" required>
+      <input type="text" id="titulo" name="titulo" value="<?= $livro->getTitulo()?>"  placeholder="Digite o título do livro" required>
       <label for="autor">Autor</label>
-      <input type="text" id="autor" name="autor" placeholder="Digite o autor" required>
+      <input type="text" id="autor" name="autor" value="<?= $livro->getAutor()?>" placeholder="Digite o autor" required>
       <label for="descricao">Descrição</label>
-      <input type="text" id="descricao" name="descricao" placeholder="Digite uma descrição" required>
+      <input type="text" id="descricao" name="descricao" value="<?= $livro->getDescricao()?>" placeholder="Digite uma descrição" required>
       <label for="imagem">Envie uma imagem do livro</label>
       <input type="file" name="imagem" accept="image/*" id="imagem" placeholder="Envie uma imagem">
 
